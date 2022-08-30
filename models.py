@@ -35,6 +35,7 @@ class User(BaseModel):
 
 
 # make a new class, all optional for update
+# as put requests will be in this format
 
 class UserUpdateRequest(BaseModel):
     first_name: Optional[str]
