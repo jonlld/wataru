@@ -1,8 +1,9 @@
 # type import
+from http.client import HTTPException
 from typing import List
 from uuid import UUID, uuid4
 # FastAPI
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 # from our models.py
 from models import User, Gender, Role
 
@@ -34,13 +35,14 @@ def root():
 
 
 # simple endpoint to serve users list
+
 @app.get("/api/v1/users")
 async def fetch_users():
     return db
 
+
 # submit a new user - same endpoint, different method
 # will receive a user of type User
-
 
 @app.post("/api/v1/users")
 async def register_user(user: User):
@@ -49,6 +51,8 @@ async def register_user(user: User):
     # send id back to client
     return {"id": user.id}
 
+
+# delete user endpoint
 # using a 'path variable'
 
 
@@ -58,3 +62,7 @@ async def delete_user(user_id: UUID):
         if user.id == user_id:
             db.remove(user)
             return
+    raise HTTPException(
+        status_code=404,
+        detail=f"user with id: {user_id} does not exist"
+    )
