@@ -30,3 +30,9 @@ db: List[User] = [
 @app.get("/")
 def root():
     return {"Hello": "Everyone!"}
+
+
+# simple endpoint to serve users list
+@app.get("/api/v1/users")
+async def fetch_users():
+    return db
