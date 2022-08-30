@@ -2,8 +2,11 @@
 from http.client import HTTPException
 from typing import List
 from uuid import UUID, uuid4
+from constants import GOOGLE_APPLICATION_CREDENTIALS
+
 # FastAPI
 from fastapi import FastAPI, HTTPException
+
 # from our models.py
 from models import User, Gender, Role, UserUpdateRequest
 
@@ -17,24 +20,25 @@ db: List[User] = [
         first_name="Jamila",
         last_name="Ahmed",
         gender=Gender.female,
-        roles=[Role.student]
+        roles=[Role.student],
     ),
     User(
         id=UUID("c0975c1e-82fa-4343-b0a0-654f077f23cb"),
         first_name="Alex",
         last_name="Jones",
         gender=Gender.male,
-        roles=[Role.admin, Role.user]
-    )
+        roles=[Role.admin, Role.user],
+    ),
 ]
 
 
 @app.get("/")
 def root():
-    return {"Hello": "Everyone!"}
+    return {"hi": "there"}
 
 
 # simple endpoint to serve users list
+
 
 @app.get("/api/v1/users")
 async def fetch_users():
@@ -43,6 +47,7 @@ async def fetch_users():
 
 # submit a new user - same endpoint, different method
 # will receive a user of type User
+
 
 @app.post("/api/v1/users")
 async def register_user(user: User):
@@ -63,13 +68,13 @@ async def delete_user(user_id: UUID):
             db.remove(user)
             return
     raise HTTPException(
-        status_code=404,
-        detail=f"user with id: {user_id} does not exist"
+        status_code=404, detail=f"user with id: {user_id} does not exist"
     )
 
 
 # update user - payload client sends will be user_update with type UserUpdateRequest (all optional)
 # take the user_update (with update class) and user_id from path
+
 
 @app.put("/api/v1/users/{user_id}")
 async def update_user(user_update: UserUpdateRequest, user_id: UUID):
@@ -87,6 +92,5 @@ async def update_user(user_update: UserUpdateRequest, user_id: UUID):
 
     # if user not found
     raise HTTPException(
-        status_code=404,
-        detail=f"user with id: {user_id} does not exist"
+        status_code=404, detail=f"user with id: {user_id} does not exist"
     )
