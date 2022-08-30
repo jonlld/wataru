@@ -2,7 +2,9 @@
 from http.client import HTTPException
 from typing import List
 from uuid import UUID, uuid4
-from constants import GOOGLE_APPLICATION_CREDENTIALS
+import os
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
 
 # FastAPI
 from fastapi import FastAPI, HTTPException
@@ -94,3 +96,24 @@ async def update_user(user_update: UserUpdateRequest, user_id: UUID):
     raise HTTPException(
         status_code=404, detail=f"user with id: {user_id} does not exist"
     )
+
+
+# sample code to test API
+def translate_text(target, text):
+    import six
+    from google.cloud import translate_v2 as translate
+
+    translate_client = translate.Client()
+
+    if isinstance(text, six.binary_type):
+        text = text.decode("utf-8")
+
+    result = translate_client.translate(text, target_language=target)
+
+    print("Text: {}".format(result["input"]))
+    print("Translation: {}".format(result["translatedText"]))
+    print("Detected source language: {}".format(result["detectedSourceLanguage"]))
+
+
+translate_text("ja", "This is a test")
+translate_text("ja", "Yesterday's sunset was really beautiful")
