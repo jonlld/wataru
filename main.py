@@ -44,6 +44,17 @@ async def fetch_users():
 
 @app.post("/api/v1/users")
 async def register_user(user: User):
+    # takes user from req body and appends
     db.append(user)
-    # send id to client
+    # send id back to client
     return {"id": user.id}
+
+# using a 'path variable'
+
+
+@app.delete("/api/v1/users/{user_id}")
+async def delete_user(user_id: UUID):
+    for user in db:
+        if user.id == user_id:
+            db.remove(user)
+            return
