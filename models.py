@@ -9,6 +9,9 @@ from enum import Enum
 # Inside class can add attributes
 # optional and data type is UUID, if not provided use uuid4
 # gender will be an Enum, which is choices we specify? import Enum and pass in class name to the attribute
+# if doesn't have Optional, is not nullable
+# id is automatically the pk
+# roles will be a list of strings, from the options in Role
 
 
 class Gender(str, Enum):
