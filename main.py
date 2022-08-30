@@ -37,3 +37,13 @@ def root():
 @app.get("/api/v1/users")
 async def fetch_users():
     return db
+
+# submit a new user - same endpoint, different method
+# will receive a user of type User
+
+
+@app.post("/api/v1/users")
+async def register_user(user: User):
+    db.append(user)
+    # send id to client
+    return {"id": user.id}
