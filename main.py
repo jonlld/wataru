@@ -11,14 +11,15 @@ app = FastAPI()
 # what syntax is this? also, not highlighted...
 db: List[User] = [
     User(
-        id=uuid4(),
+        # id=uuid4(),
+        id=uuid4("c7a09d0b-ac43-4ab5-ab1a-55c626fe0953"),
         first_name="Jamila",
         last_name="Ahmed",
         gender=Gender.female,
         roles=[Role.student]
     ),
     User(
-        id=uuid4(),
+        id=uuid4("c0975c1e-82fa-4343-b0a0-654f077f23cb"),
         first_name="Alex",
         last_name="Jones",
         gender=Gender.male,
