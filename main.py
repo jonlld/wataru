@@ -68,7 +68,7 @@ async def delete_user(user_id: UUID):
     )
 
 
-# update user - payload client sends in this case will be in the format of the UserUpdateRequest (and all are optional)
+# update user - payload client sends will be user_update with type UserUpdateRequest (all optional)
 # take the user_update (with update class) and user_id from path
 
 @app.put("/api/v1/users/{user_id}")
