@@ -5,12 +5,8 @@ from pydantic import BaseModel
 # Class will extend BaseModel
 # Add attributes
 class UserRequest(BaseModel):
-    request_string: str
-    request_lang: str
-
-
-# make a new class, all optional for update
-# as put requests will be in this format
+    lang: str
+    string: str
 
 
 class Phrase(BaseModel):
