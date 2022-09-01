@@ -46,13 +46,11 @@ def translate_text(target, text):
     return result
 
 
-# BUG working with Postman, not frontend
 @app.get("/api/phrases")
 def fetch_all():
-    return "data from server"
+    return phrases
 
 
-# working with Postman, not frontend
 @app.post("/api/phrases")
 async def translate_request(req: UserRequest):
     print("req", req)
