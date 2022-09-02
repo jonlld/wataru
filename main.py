@@ -11,7 +11,7 @@ import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
 
 from fastapi import FastAPI, HTTPException
-from models import UserRequest, Phrase
+from models import UserRequest
 
 app = FastAPI()
 
@@ -27,7 +27,7 @@ app.add_middleware(
 
 phrases = []
 
-# Google Translate - Client API
+# Google Translate - Client Interface
 def translate_text(target, text):
     import six
     from google.cloud import translate_v2 as translate

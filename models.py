@@ -7,8 +7,3 @@ from pydantic import BaseModel
 class UserRequest(BaseModel):
     lang: str
     string: str
-
-
-class Phrase(BaseModel):
-    text: str
-    translation: str
